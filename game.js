@@ -34,7 +34,14 @@ function start(n) {
         }
     });
 
-   
+    //mask cells 
+    gameCells.forEach( n => {
+        n.classList.add('mask')
+        n.onclick = function (el) {
+            console.log(el.target.classList)
+            el.target.classList.remove('mask')
+        }
+    })
 }
 
 start(10);
