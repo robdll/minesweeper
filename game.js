@@ -22,7 +22,11 @@ function start(n) {
                 .map( c => c+idx)
                 .map( c => arr[c]);
             let bombNumber = adjacentCells.map( c => c.classList.contains('bomb') ? 1 : 0).reduce( (a,b) => a+b, 0);
-            if(bombNumber>0) gameCells[idx].innerText = bombNumber
+            if(bombNumber>0) {
+                var cls = ['blue', 'green', 'red', 'peru', 'purple', 'purple', 'purple'];
+                gameCells[idx].innerText = bombNumber;
+                gameCells[idx].classList.add(cls[bombNumber-1]);
+            }
         }
     });
 
@@ -36,19 +40,21 @@ function start(n) {
         n.onclick = function (el) {
             let isBomb = el.target.classList.contains('bomb');
             if(isBomb) {
-                cell.classList.remove('mask');
-                console.log('game over');
+                el.target.classList.remove('mask');
+                displayGameOver('You Lost', 'red')
             } else {
                 checkContent(el.target)
             }
         }
     })
 
+    //recursion
     function checkContent(cell) {
         if(!cell.classList.contains('mask')) {
             return
         }
         cell.classList.remove('mask');
+        checkWin()
         let isNextToBomb = cell.innerText !== '';
         if(!isNextToBomb) {
             let cellIdx = gameCells.indexOf(cell);
@@ -58,10 +64,17 @@ function start(n) {
                 .map( c => c+cellIdx)
                 .map( c => gameCells[c])
                 .forEach( c => { checkContent(c) });
-        }
-        
+        }   
     }
 
+    function checkWin() {
+        var remainingCell = gameCells.filter( c => c.classList.contains('mask'));
+        if(remainingCell.length === 10) {
+            displayGameOver('You Won!', 'green')
+        }
+    }
+
+    // util function
     function getCellToIgnore(id) {
         let toIgnore = [];
         const cellsAbove = [-11, -10, -9];
@@ -74,6 +87,15 @@ function start(n) {
         if (id%10===9) { toIgnore = toIgnore.concat(cellsOnRight);}
         return toIgnore;
     }
+    
+
+    function displayGameOver(text, cls) {
+        // const popup = document.getElementsById('gameover');
+        // popup.innerText = text;
+        // popup.classList.add(cls);
+        // popup.parentElement.remove('hidden');
+    }
+
 }
 
 start(10);

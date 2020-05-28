@@ -56,3 +56,24 @@ html, body {
     bottom: 1px;
     z-index: 2;
 }
+
+
+.blue, .green, .red, .black, .purple {
+    font-weight: bold;
+}
+
+.blue {
+    color:  blue;
+}
+.green {
+    color:  green;
+}
+.red {
+    color:  red;
+}
+.purple {
+    color:  purple;
+}
+.peru {
+    color: peru;
+}
