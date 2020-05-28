@@ -1,6 +1,7 @@
 html, body {
     height: 100%;
     margin: 0;
+    font-family: 'Chelsea Market', cursive;
 }
 
 
@@ -151,4 +152,9 @@ html, body {
     cursor: pointer;
     background: gray;
     border-radius: 5px;
+    font-size: 0.7em;
+}
+
+span {
+    font-size: 1.5em;
 }
