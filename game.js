@@ -18,7 +18,7 @@ function start(type) {
         cell.classList = ['game-cell']
     });
     ['easy', 'medium', 'hard'].forEach( level => { difficulty[level].active = type === level})
-    document.getElementById('bomb-available').innerText = difficulty[level].bomb;
+    document.getElementById('bomb-available').innerText = difficulty[type].bomb;
 
 
     let bombs = difficulty[type].bomb;
