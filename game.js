@@ -1,5 +1,5 @@
-const difficullty = {
-    easy: { bomb: 10 },
+const difficulty = {
+    easy: { bomb: 10, available: true },
     medium: { bomb: 15 },
     hard: { bomb: 20 },
 }
@@ -8,6 +8,7 @@ const difficullty = {
 function start(type) {
 
     //restart logic
+    if(!difficulty[type].available) { return }
     var nodeList = document.getElementsByClassName("game-cell");
     var gameCells = Array.from(nodeList);
     const popup = document.getElementById('popup');
@@ -15,9 +16,11 @@ function start(type) {
     gameCells.forEach( cell => { 
         cell.innerText = '';
         cell.classList = ['game-cell']
-    })
+    });
+    ['easy', 'medium', 'hard'].forEach( level => { difficulty[level].active = type === level})
 
-    let bombs = difficullty[type].bomb;
+
+    let bombs = difficulty[type].bomb;
     // place bombs logic
     var totalCells = gameCells.length;
     while(bombs > 0 ) {
@@ -64,6 +67,7 @@ function start(type) {
 
     //recursion function
     function checkContent(cell) {
+
         if(!cell.classList.contains('mask')) {
             return
         }
@@ -84,7 +88,7 @@ function start(type) {
     //display game over logic 
     function checkWin() {
         var remainingCell = gameCells.filter( c => c.classList.contains('mask'));
-        if(remainingCell.length === difficullty[type].bomb) {
+        if(remainingCell.length === difficulty[type].bomb) {
             displayGameOver('You Won!', 'green')
         }
     }
@@ -117,6 +121,18 @@ function displayGameOver(text, cls) {
     const cardHeader = document.getElementsByClassName('game-over-header')[0];
     cardHeader.innerText = text;
     cardHeader.classList.add(cls);
+    if(cls === 'green') {
+        const b2 =  document.getElementsByClassName('button2')[0];
+        const b3 =  document.getElementsByClassName('button3')[0];
+        if(difficulty.easy.active) { 
+            difficulty.medium.available = true; 
+            b2.classList.remove('inactive')
+        }
+        if(difficulty.medium.active) { 
+            difficulty.hard.available = true; 
+            b3.classList.remove('inactive')
+        }
+    }
 }
 
 start('easy');

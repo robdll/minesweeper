@@ -139,9 +139,15 @@ html, body {
     margin: 5px;    
 }
 
+
 .button1 { color: white; background-color: #4CAF50;}
 .button2 { color: white; background-color: #008CBA;}
 .button3 { color: white; background-color: #f44336;}
+
+.inactive {
+    cursor: not-allowed;
+    background-color: lightgray;
+}
 
 .howtoplay {
     float: right;
