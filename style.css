@@ -64,6 +64,19 @@ html, body {
     z-index: 2;
 }
 
+.yellow.mask::before {
+    background-color: khaki;
+}
+
+.yellow-square {
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    border: 1px solid black;
+    background-color: khaki;
+}
+
+
 
 .blue, .green, .red, .black, .purple {
     font-weight: bold;
@@ -149,6 +162,17 @@ html, body {
     background-color: lightgray;
 }
 
+.possible-bomb {
+    float: left;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+}
+
+
 .howtoplay {
     float: right;
     position: absolute;
@@ -162,7 +186,7 @@ html, body {
     font-size: 0.7em;
 }
 
-span {
+.game-title {
     font-size: 1.5em;
 }
 

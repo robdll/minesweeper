@@ -55,6 +55,24 @@ function start(type) {
     //click logic
     gameCells.forEach( cell => {
         cell.onclick = function (el) {
+            //avoid action if cell is yellow or already checked
+            if(!el.altKey && el.target.classList.contains("yellow")) return ;
+            if(!el.target.classList.contains('mask')) return ;
+
+            // toggle yellow color if alt clicked 
+            if(el.altKey) {
+                var placed = document.getElementsByClassName("yellow").length;
+                if(el.target.classList.contains("yellow")) {
+                    el.target.classList.toggle("yellow");
+                    document.getElementById('bomb-available').innerText = (difficulty[type].bomb - placed +1);
+                    return
+                } else if(placed < difficulty[type].bomb) {
+                    el.target.classList.toggle("yellow");
+                    document.getElementById('bomb-available').innerText = (difficulty[type].bomb - placed -1);
+                } 
+                return ;
+            }
+            
             let isBomb = el.target.classList.contains('bomb');
             if(isBomb) {
                 el.target.classList.remove('mask');
@@ -67,11 +85,13 @@ function start(type) {
 
     //recursion function
     function checkContent(cell) {
-
-        if(!cell.classList.contains('mask')) {
-            return
+        if(!cell.classList.contains('mask')) return ;
+        cell.classList.remove('mask'); 
+        if(cell.classList.contains('yellow')) {
+            cell.classList.remove('yellow');
+            const currentVal = Number.parseInt(document.getElementById('bomb-available').innerText)
+            document.getElementById('bomb-available').innerText = currentVal +1;
         }
-        cell.classList.remove('mask');
         checkWin()
         let isNextToBomb = cell.innerText !== '';
         if(!isNextToBomb) {
