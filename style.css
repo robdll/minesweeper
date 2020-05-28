@@ -77,3 +77,60 @@ html, body {
 .peru {
     color: peru;
 }
+
+.popup {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 15;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.show {
+    display: flex;
+}
+
+.bg-opaque {
+    background: black;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0.5;
+}
+
+.game-over {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 16;
+}
+
+.game-over-actions {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.restart {
+    cursor: pointer;
+    border: 0px;
+    padding: 10px;
+    width: 65px;
+    margin: 5px;    
+}
+
+.button1 { color: white; background-color: #4CAF50;} /* Green */
+.button2 { color: white; background-color: #008CBA;} /* Blue */
+.button3 { color: white; background-color: #f44336;} /* Red */

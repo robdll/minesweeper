@@ -1,26 +1,33 @@
 const difficullty = {
     easy: { bomb: 10 },
-    normal: { bomb: 15 },
+    medium: { bomb: 15 },
     hard: { bomb: 20 },
 }
 
 function start(type) {
 
-    let n = difficullty[type].bomb;
-    // place bombs
-    if(n > 30) { n = 30; }
+    //restart logic
     var nodeList = document.getElementsByClassName("game-cell");
     var gameCells = Array.from(nodeList);
+    const popup = document.getElementById('popup');
+    popup.classList.remove('show');
+    gameCells.forEach( cell => { 
+        cell.innerText = '';
+        cell.classList = ['game-cell']
+    })
+
+    let bombs = difficullty[type].bomb;
+    // place bombs logic
     var totalCells = gameCells.length;
-    while(n > 0 ) {
+    while(bombs > 0 ) {
         let index = Math.floor(Math.random() * totalCells);
         gameCells[index].classList.add('bomb');
         gameCells.splice(index, 1)
         totalCells--;
-        n--;
+        bombs--;
     }
 
-    //place numbers
+    //place numbers logic
     gameCells = Array.from(nodeList);
     gameCells.forEach( (cell, idx, arr) => {
         if(!cell.classList.contains('bomb')) {
@@ -39,13 +46,11 @@ function start(type) {
     });
 
     //mask cells 
-    gameCells.forEach( n => {
-        n.classList.add('mask')
-    })
+    gameCells.forEach( cell => { cell.classList.add('mask') })
 
     //click logic
-    gameCells.forEach( n => {
-        n.onclick = function (el) {
+    gameCells.forEach( cell => {
+        cell.onclick = function (el) {
             let isBomb = el.target.classList.contains('bomb');
             if(isBomb) {
                 el.target.classList.remove('mask');
@@ -56,7 +61,7 @@ function start(type) {
         }
     })
 
-    //recursion
+    //recursion function
     function checkContent(cell) {
         if(!cell.classList.contains('mask')) {
             return
@@ -78,7 +83,7 @@ function start(type) {
     //display game over logic 
     function checkWin() {
         var remainingCell = gameCells.filter( c => c.classList.contains('mask'));
-        if(remainingCell.length === 10) {
+        if(remainingCell.length === difficullty[type].bomb) {
             displayGameOver('You Won!', 'green')
         }
     }
@@ -99,13 +104,15 @@ function start(type) {
     
 
     function displayGameOver(text, cls) {
-        // const popup = document.getElementsById('gameover');
-        // popup.innerText = text;
-        // popup.classList.add(cls);
-        // popup.parentElement.remove('hidden');
+        const popup = document.getElementById('popup');
+        popup.classList.add('show');
+        const cardHeader = document.getElementsByClassName('game-over-header')[0];
+        cardHeader.innerText = text;
+        cardHeader.classList.add(cls);
+
     }
 
 }
 
-start('hard');
+start('easy');
 

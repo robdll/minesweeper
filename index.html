@@ -8,6 +8,21 @@
         <script src="game.js" defer></script>
     </head>
     <body>
+
+        <article id="popup" class="popup" >
+            <div class="bg-opaque"></div>
+            <div class="game-over">
+                <header class="game-over-header"></header>
+                <p>Select next game difficulty</p>
+                <div class="game-over-actions"> 
+                    <button class="button1 restart" onclick="start('easy')"> Easy </button>
+                    <button class="button2 restart" onclick="start('medium')"> Medium </button>
+                    <button class="button3 restart" onclick="start('hard')"> Hard </button>
+                </div>
+            </div>
+        </article>
+        
+        
         <div class="game-container">
             <header class="game-header"> My Game </header>
             <div class="game-cell"></div>
