@@ -115,7 +115,8 @@ html, body {
     background: white;
     padding: 20px;
     border-radius: 5px;
-    width: 30%;
+    min-width: 30%;
+    max-width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -157,4 +158,16 @@ html, body {
 
 span {
     font-size: 1.5em;
+}
+
+@media only screen and (min-width: 600px) {
+    .game-over {
+        max-width: 60%;
+    }
+}
+
+@media only screen and (min-width: 1000px) {
+    .game-over {
+        max-width: 50%;
+    }
 }
