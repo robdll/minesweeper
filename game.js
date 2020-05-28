@@ -1,4 +1,12 @@
-function start(n) {
+const difficullty = {
+    easy: { bomb: 10 },
+    normal: { bomb: 15 },
+    hard: { bomb: 20 },
+}
+
+function start(type) {
+
+    let n = difficullty[type].bomb;
     // place bombs
     if(n > 30) { n = 30; }
     var nodeList = document.getElementsByClassName("game-cell");
@@ -67,6 +75,7 @@ function start(n) {
         }   
     }
 
+    //display game over logic 
     function checkWin() {
         var remainingCell = gameCells.filter( c => c.classList.contains('mask'));
         if(remainingCell.length === 10) {
@@ -98,5 +107,5 @@ function start(n) {
 
 }
 
-start(10);
+start('hard');
 
