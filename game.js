@@ -4,6 +4,7 @@ const difficullty = {
     hard: { bomb: 20 },
 }
 
+
 function start(type) {
 
     //restart logic
@@ -101,17 +102,21 @@ function start(type) {
         if (id%10===9) { toIgnore = toIgnore.concat(cellsOnRight);}
         return toIgnore;
     }
-    
 
-    function displayGameOver(text, cls) {
-        const popup = document.getElementById('popup');
-        popup.classList.add('show');
-        const cardHeader = document.getElementsByClassName('game-over-header')[0];
-        cardHeader.innerText = text;
-        cardHeader.classList.add(cls);
+}
 
-    }
+function toggleHowToPlay() {
+    const popup = document.getElementById('howtoplay');
+    const fnToCall = popup.classList.contains('show') ? 'remove' : 'add';
+    popup.classList[fnToCall]('show');
+}
 
+function displayGameOver(text, cls) {
+    const popup = document.getElementById('popup');
+    popup.classList.add('show');
+    const cardHeader = document.getElementsByClassName('game-over-header')[0];
+    cardHeader.innerText = text;
+    cardHeader.classList.add(cls);
 }
 
 start('easy');
